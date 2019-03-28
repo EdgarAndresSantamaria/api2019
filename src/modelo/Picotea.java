@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.json.*;
 import org.apache.commons.io.FileUtils;
 
@@ -15,28 +17,161 @@ public class Picotea {
 	private String decripcion;
 	private ArrayList<Establecimiento> bares;
 	private ArrayList<Pedido> pedidos;
-	private int id = 0;
+	private int id;
 	
 	/**
 	 * TODO
 	 */
 	private Picotea() {
+		id=0;
 		bares = cargarEstablecimientos();
+		pedidos = new ArrayList<Pedido> ();
 		decripcion = "Picotea es una App para reservar productos en tus establecimientos de siempre !";
 	}
 	
-	public void generateJSON4Integrate() {
-		/**
-		for(Establecimiento e: bares) {
-			e.mostrarCarta();
-			e.mostrarEstablecimiento();
+	/**
+	 * TODO
+	 * @return
+	 */
+	public JSONObject verPicotea() {
+		if(LoginRegistro.getInstance().verLogin().isEmpty()) {
+			// mostrar datos vista antes de registro/login
+			JSONObject picotea = new JSONObject();
+			picotea.put("descripcion", decripcion);
+			picotea.put("userLoged", false);
+			return picotea;
+		}else {
+			// mostrar datos una vez registro/login
+			JSONObject picotea = new JSONObject();
+			picotea.put("usuario", LoginRegistro.getInstance().verLogin().getString("usuario"));
+			picotea.put("userLoged", true);
+			return picotea;	
 		}
-		*/
+	}
+	
+	
+	/**
+	 * TODO
+	 * @return
+	 */
+	public JSONObject verPedidos() {
+		JSONArray arrayPedido = new JSONArray();
+		for(Pedido p : pedidos) {
+			arrayPedido.put(p.verPedido());
+		}
+		JSONObject pedidos = new JSONObject();
+		pedidos.put("pedidos", arrayPedido);
+		return pedidos;
+	}
+	
+	/**
+	 * TODO
+	 * @return
+	 */
+	public JSONObject verEstablecimientos(String categoria, String barrio) {
+		JSONArray arrayEstablecimientos = new JSONArray();
+		for(Establecimiento e : bares) {
+			if(e.match(categoria,barrio)) {
+				arrayEstablecimientos.put(e.getNombre());
+			}
+		}
+		JSONObject establecimientos = new JSONObject();
+		establecimientos.put("establecimientos", arrayEstablecimientos);
+		return establecimientos;
+	}
+	
+	/**
+	 * TODO
+	 */
+	public void entrarEstablecimiento(String nombre_bar) {		
+		Boolean enc=false;
+		Iterator<Establecimiento> it = bares.iterator();
+		Establecimiento result= null;
+		while(it.hasNext() && !enc) {
+			Establecimiento next = it.next();
+			if(next.is(nombre_bar)) {
+				enc=true;
+				result=next;
+			}
+		}
+		result.mostrarEstablecimiento();
+	}
+
+
+	/**
+	 * TODO
+	 */
+	public void mostrarEstablecimientos(String categoria, String barrio) {		
+		System.out.println(verEstablecimientos(categoria,barrio).toString(4));
+		// TODO integrate GUI lista de busquedas
+	}
+
+	/**
+	 * TODO
+	 */
+	public void mostrarPedidos() {		
+		System.out.println(verPedidos().toString(4));
+		// TODO integrate GUI pedidos
+	}
+	
+	/**
+	 * TODO
+	 */
+	public void mostrarPicotea() {		
+		System.out.println(verPicotea().toString(4));
+		// TODO integrate GUI Picotea
+	}
+	
+	/**
+	 * SandBox testing zone..
+	 */
+	public void simulador() {
+		
+		/**
+		 * Prueba entrar en establecimiento (Ibarreko_Bar1)
+		 */
+		// Picotea.getInstance().entrarEstablecimiento("Ibarreko_Bar1");	
+		/**
+		 * Prueba busqueda (bar,Ibarrekolanda) + display
+		 */
+		//Picotea.getInstance().mostrarEstablecimientos("bar","Ibarrekolanda");		
+		/**
+		 * Prueba busqueda (bar,Deusto) + display
+		 */
+		//Picotea.getInstance().mostrarEstablecimientos("bar","Deusto");	
+		/**
+		 * Prueba busqueda (ermita,Ibarrekolanda) + display
+		 */
+		//Picotea.getInstance().mostrarEstablecimientos("ermita","Ibarrekolanda");	
+		/**
+		 * prueba registro y display de pedidos
+		 */
+		/**
 		Resumen.getInstance().setBar("Deusto_Bar");
 		bares.get(1).anadirCarritoItem("café & té", "café");
 		bares.get(1).anadirCarritoItem("café & té", "té rojo");
 		bares.get(1).anadirCarritoOferta("3x2 marianito");
-		Resumen.getInstance().mostrarResumen();
+		Resumen.getInstance().finalizarPedido();
+		Resumen.getInstance().setBar("Ibarreko_Bar");
+		bares.get(0).anadirCarritoItem("comida", "snacks");
+		bares.get(0).anadirCarritoItem("bebida", "cerveza");
+		bares.get(0).anadirCarritoOferta("3x2 en snacks");
+		Resumen.getInstance().finalizarPedido();
+		mostrarPedidos();
+		*/
+		
+		/**
+		 * Prueba login/registro
+		 */
+		/**
+		LoginRegistro.getInstance().registrar("edgar", "a", "234-234-234");
+		LoginRegistro.getInstance().registrar("admin", "admin", "234-234-234");
+		System.out.println(LoginRegistro.getInstance().existeUsuario("edgar"));
+		System.out.println(LoginRegistro.getInstance().existeUsuario("paco"));
+		System.out.println(LoginRegistro.getInstance().entrar("edgar","j"));
+		System.out.println(LoginRegistro.getInstance().verLogin().toString(4));
+		System.out.println(LoginRegistro.getInstance().entrar("edgar","a"));
+		 */
 	}
 	
 	/**
@@ -80,7 +215,6 @@ public class Picotea {
 		try {
 			content = FileUtils.readFileToString(file, "utf-8");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         JSONObject obj = new JSONObject(content);
@@ -158,7 +292,6 @@ public class Picotea {
 	 * @param args
 	 */
 	public static void main(String[]args) {
-		Picotea.getInstance().generateJSON4Integrate();;
-		
+		Picotea.getInstance().simulador();		
 	}
 }
