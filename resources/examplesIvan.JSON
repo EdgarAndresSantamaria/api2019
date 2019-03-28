@@ -1,0 +1,228 @@
+{
+    "ofertas": [{
+        "precio": 5,
+        "informacion": {
+            "nombre": "3x2 marianito",
+            "items": [{
+                "precio": 2.5,
+                "name": "marianito"
+            }]
+        }
+    }],
+    "nombre": "Deusto_Bar",
+    "productos": [
+        {
+            "precio": 1.5,
+            "name": "café"
+        },
+        {
+            "precio": 1.25,
+            "name": "té rojo"
+        }
+    ]
+}
+
+
+
+// ver resumen 
+{
+    "ofertas": [{
+        "precio": 2,
+        "informacion": {
+            "nombre": "3x2 en snacks",
+            "items": [{
+                "precio": 1.5,
+                "name": "snacks"
+            }]
+        }
+    }],
+    "nombre": "Ibarreko_Bar",
+    "productos": [
+        {
+            "precio": 1.5,
+            "name": "snacks"
+        },
+        {
+            "precio": 1.2,
+            "name": "cerveza"
+        }
+    ]
+}
+
+
+// ver carta
+{"carta": [
+    {
+        "nombre": "comida",
+        "items": [
+            {
+                "precio": 1.5,
+                "name": "snacks"
+            },
+            {
+                "precio": 1.25,
+                "name": "sandwiches"
+            }
+        ]
+    },
+    {
+        "nombre": "bebida",
+        "items": [
+            {
+                "precio": 0.6,
+                "name": "vino tinto"
+            },
+            {
+                "precio": 1.2,
+                "name": "cerveza"
+            }
+        ]
+    }
+]}
+
+
+// ver establecimiento
+{
+    "tipo": "bar",
+    "barrio": "Ibarrekolanda",
+    "descripion": "el bar de Ibarreko",
+    "mail": "foo@mail.com",
+    "ofertas": [{
+        "precio": 2,
+        "informacion": {
+            "nombre": "3x2 en snacks",
+            "items": [{
+                "precio": 1.5,
+                "name": "snacks"
+            }]
+        }
+    }],
+    "nombre": "Ibarreko_Bar"
+}
+
+// ver carta
+{"carta": [
+    {
+        "nombre": "café & té",
+        "items": [
+            {
+                "precio": 1.5,
+                "name": "café"
+            },
+            {
+                "precio": 1.25,
+                "name": "té rojo"
+            }
+        ]
+    },
+    {
+        "nombre": "bebida",
+        "items": [
+            {
+                "precio": 2.5,
+                "name": "marianito"
+            },
+            {
+                "precio": 2,
+                "name": "cerveza"
+            }
+        ]
+    }
+]}
+
+// ver establecimiento
+{
+    "tipo": "bar",
+    "barrio": "Deusto",
+    "descripion": "el bar de deusto",
+    "mail": "foo@mail.com",
+    "ofertas": [{
+        "precio": 5,
+        "informacion": {
+            "nombre": "3x2 marianito",
+            "items": [{
+                "precio": 2.5,
+                "name": "marianito"
+            }]
+        }
+    }],
+    "nombre": "Deusto_Bar"
+}
+
+// ver carta
+{"carta": [{
+    "nombre": "bebida",
+    "items": [
+        {
+            "precio": 1.25,
+            "name": "vino tinto"
+        },
+        {
+            "precio": 2,
+            "name": "cerveza"
+        },
+        {
+            "precio": 1.25,
+            "name": "vino blanco"
+        },
+        {
+            "precio": 1.25,
+            "name": "vino rosado"
+        }
+    ]
+}]}
+
+// ver establecimiento
+{
+    "tipo": "bar",
+    "barrio": "Ibarrekolanda",
+    "descripion": "el bar de Ibarreko",
+    "mail": "foo@mail.com",
+    "ofertas": [{
+        "precio": 2.5,
+        "informacion": {
+            "nombre": "3x2 vino blanco",
+            "items": [{
+                "precio": 1.25,
+                "name": "vino blanco"
+            }]
+        }
+    }],
+    "nombre": "Ibarreko_Bar1"
+}
+
+// ejemplo busquedas (bar,Ibarrekolanda)
+{"establecimientos": [
+    "Ibarreko_Bar",
+    "Ibarreko_Bar1"
+]}
+
+// ejemplo busquedas (bar,Desuto)
+{"establecimientos": ["Deusto_Bar"]}
+
+// ejemplo busquedas (ermita,Ibarrekolanda)
+{"establecimientos": []}
+
+// ejemplo entrar en establecimiento ibarreko_bar 1
+{
+    "tipo": "bar",
+    "barrio": "Ibarrekolanda",
+    "descripion": "el bar de Ibarreko",
+    "mail": "foo@mail.com",
+    "ofertas": [{
+        "precio": 2.5,
+        "informacion": {
+            "nombre": "3x2 vino blanco",
+            "items": [{
+                "precio": 1.25,
+                "name": "vino blanco"
+            }]
+        }
+    }],
+    "nombre": "Ibarreko_Bar1"
+}
+
+
+
+// Nota: para añadir los items y las ofertas al resumen se utilizan los metodos : anadirCarritoItem y anadirCarritoOferta de la clase establecimiento
+// esa clase te la pasare cuando muestres una carta ... (asik tenlo en cuenta internamente)
