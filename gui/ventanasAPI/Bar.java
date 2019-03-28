@@ -8,14 +8,17 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.JList;
 
 public class Bar {
 
@@ -55,7 +58,7 @@ public class Bar {
 		
 		
 		
-		String resourceName = "./resources/examples.JSON";
+		String resourceName = "./resources/examplesIvan.JSON";
 		File file = new File(resourceName);
 		String content=null;
 		try {
@@ -66,10 +69,34 @@ public class Bar {
 		}
 		JSONObject bar = new JSONObject(content);
 		
-		String nombre = bar.getString("nombre");
-		String descripcion = bar.getString("descripcion");
+		DefaultListModel<String> model = new DefaultListModel<>();
+		JList<String> list = new JList<>(model);
+		list.setBounds(77, 190, 241, 78);
+		frame.getContentPane().add(list);
+		frame.setBounds(100, 100, 708, 470);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel lblDescripcin = new JLabel(descripcion);
+		DefaultListModel<String> modelPrecios = new DefaultListModel<>();
+		JList list_1 = new JList(modelPrecios);
+		list_1.setBounds(374, 190, 241, 88);
+		frame.getContentPane().add(list_1);
+		
+		
+		String nombre = bar.getString("nombre");
+		System.out.println(bar.getJSONArray("productos"));
+		
+		JSONArray products = bar.getJSONArray("productos");
+		for(int i=0;i< products.length();i++) {
+			double precio = products.getJSONObject(i).getDouble("precio");
+			System.out.println(products.getJSONObject(i).getDouble("precio"));
+			String nomProducto = products.getJSONObject(i).getString("name");
+			
+			modelPrecios.addElement(Double.toString(precio));
+			model.addElement(nomProducto);
+		}
+		
+		
+		JLabel lblDescripcin = new JLabel();
 		lblDescripcin.setForeground(Color.WHITE);
 		lblDescripcin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblDescripcin.setBounds(144, 80, 298, 41);
@@ -95,12 +122,26 @@ public class Bar {
 		button.setBounds(618, 16, 53, 41);
 		frame.getContentPane().add(button);
 		
-		JLabel lblNewLabel = new JLabel(nombre);// aqui el nombre sacado del json 
+		JLabel lblNewLabel = new JLabel(nombre);
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblNewLabel.setBounds(144, 16, 298, 41);
 		frame.getContentPane().add(lblNewLabel);
-		frame.setBounds(100, 100, 708, 470);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel lblProductos = new JLabel("Productos");
+		lblProductos.setForeground(Color.WHITE);
+		lblProductos.setBounds(77, 148, 106, 20);
+		frame.getContentPane().add(lblProductos);
+		
+		
+		
+		JLabel lblPrecios = new JLabel("Precios");
+		lblPrecios.setForeground(Color.WHITE);
+		lblPrecios.setBounds(374, 148, 106, 20);
+		frame.getContentPane().add(lblPrecios);
+		
+		
+		
+		
 	}
 }
