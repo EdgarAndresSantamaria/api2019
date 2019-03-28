@@ -5,30 +5,34 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import modelo.Establecimiento;
+import modelo.Oferta;
+import modelo.Picotea;
+
 import javax.swing.JSpinner;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.swing.JList;
+import javax.swing.ListModel;
 
 public class Carta {
 
 	private JFrame frame;
-	private JLabel bebida1;
-	private JLabel bebida2;
-	private JLabel bebida3;
 	private JLabel lblPrecioUnidad;
-	private JLabel pb1;
-	private JLabel pb2;
-	private JLabel pb3;
 	private JLabel label_3;
-	private JLabel comida1;
-	private JLabel comida2;
-	private JLabel comida3;
-	private JLabel pc1;
-	private JLabel pc2;
-	private JLabel pc3;
 
 	/**
 	 * Launch the application.
@@ -122,47 +126,11 @@ public class Carta {
 		lblNewLabel.setBounds(457, 85, 183, 174);
 		frame.getContentPane().add(lblNewLabel);
 		
-		bebida1 = new JLabel("Caf\u00E9");
-		bebida1.setForeground(SystemColor.text);
-		bebida1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		bebida1.setBounds(15, 85, 146, 26);
-		frame.getContentPane().add(bebida1);
-		
-		bebida2 = new JLabel("T\u00E9");
-		bebida2.setForeground(Color.WHITE);
-		bebida2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		bebida2.setBounds(15, 127, 146, 26);
-		frame.getContentPane().add(bebida2);
-		
-		bebida3 = new JLabel("Vino");
-		bebida3.setForeground(Color.WHITE);
-		bebida3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		bebida3.setBounds(15, 172, 146, 26);
-		frame.getContentPane().add(bebida3);
-		
 		lblPrecioUnidad = new JLabel("Precio Unidad");
 		lblPrecioUnidad.setForeground(Color.WHITE);
 		lblPrecioUnidad.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		lblPrecioUnidad.setBounds(188, 49, 146, 20);
 		frame.getContentPane().add(lblPrecioUnidad);
-		
-		pb1 = new JLabel("1,50\u20AC");
-		pb1.setForeground(Color.WHITE);
-		pb1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		pb1.setBounds(188, 85, 146, 26);
-		frame.getContentPane().add(pb1);
-		
-		pb2 = new JLabel("1,50\u20AC");
-		pb2.setForeground(Color.WHITE);
-		pb2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		pb2.setBounds(188, 127, 146, 26);
-		frame.getContentPane().add(pb2);
-		
-		pb3 = new JLabel("2\u20AC");
-		pb3.setForeground(Color.WHITE);
-		pb3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		pb3.setBounds(188, 172, 146, 26);
-		frame.getContentPane().add(pb3);
 		
 		label_3 = new JLabel("Precio Unidad");
 		label_3.setForeground(Color.WHITE);
@@ -170,41 +138,52 @@ public class Carta {
 		label_3.setBounds(188, 232, 146, 20);
 		frame.getContentPane().add(label_3);
 		
-		comida1 = new JLabel("Pincho tortilla");
-		comida1.setForeground(Color.WHITE);
-		comida1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		comida1.setBounds(15, 268, 146, 26);
-		frame.getContentPane().add(comida1);
+		DefaultListModel<String> model = new DefaultListModel<>();
+		JList<String> list = new JList<>( model );
+		list.setBounds(15, 101, 162, 115);
+		frame.getContentPane().add(list);
 		
-		comida2 = new JLabel("Sandwich mixto");
-		comida2.setForeground(Color.WHITE);
-		comida2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		comida2.setBounds(15, 310, 146, 26);
-		frame.getContentPane().add(comida2);
+		DefaultListModel<String> model1 = new DefaultListModel<>();
+		JList<String> list2 = new JList<>(model1);
+		list2.setBounds(188, 101, 162, 115);
+		frame.getContentPane().add(list2);
 		
-		comida3 = new JLabel("Bravas");
-		comida3.setForeground(Color.WHITE);
-		comida3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		comida3.setBounds(15, 355, 146, 26);
-		frame.getContentPane().add(comida3);
 		
-		pc1 = new JLabel("1,50\u20AC");
-		pc1.setForeground(Color.WHITE);
-		pc1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		pc1.setBounds(188, 271, 146, 26);
-		frame.getContentPane().add(pc1);
-		
-		pc2 = new JLabel("3\u20AC");
-		pc2.setForeground(Color.WHITE);
-		pc2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		pc2.setBounds(188, 313, 146, 26);
-		frame.getContentPane().add(pc2);
-		
-		pc3 = new JLabel("3,5\u20AC");
-		pc3.setForeground(Color.WHITE);
-		pc3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		pc3.setBounds(188, 355, 146, 26);
-		frame.getContentPane().add(pc3);
-	}
+			String resourceName = "./resources/examples.JSON";
+			File file = new File(resourceName);
+			String content=null;
+			try {
+				content = FileUtils.readFileToString(file, "utf-8"); //pasa a un String un file
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        JSONObject obj = new JSONObject(content);
+			// lista de establecimientos temporal
+			ArrayList<String> ofertasTmp = new ArrayList<String> ();
+			JSONArray arr = obj.getJSONArray("ofertas");
+			for (int i = 0; i < arr.length(); i++)
+			{
+				// recuperar valores generales
+			    double precio = arr.getJSONObject(i).getDouble("precio");
+			    JSONObject informacion = (JSONObject) arr.getJSONObject(i).get("informacion");
+			    String nombre = informacion.getString("nombre");
+			    model.addElement(nombre);
 
+			    model1.addElement(Double.toString(precio));
+			    JSONArray items = informacion.getJSONArray("items");
+			    for(int k=0;k<items.length();k++) {
+			    	precio = items.getJSONObject(k).getDouble("precio");
+			    	nombre = items.getJSONObject(k).getString("name");
+			    	model.addElement(nombre);
+			    	model1.addElement(Double.toString(precio));
+			    	
+			    }
+			}
+			
+			
+			
+				
+	
+}
 }

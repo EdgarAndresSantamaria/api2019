@@ -158,7 +158,7 @@ public class Picotea {
 	 * @param args
 	 */
 	public static void main(String[]args) {
-		Picotea.getInstance().generateJSON4Integrate();;
+		Picotea.getInstance().generateJSON4Integrate();
 		
 	}
 }

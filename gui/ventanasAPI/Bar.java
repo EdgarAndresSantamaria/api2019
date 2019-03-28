@@ -6,10 +6,16 @@ import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import org.apache.commons.io.FileUtils;
+import org.json.JSONObject;
+
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.io.File;
+import java.io.IOException;
 
 public class Bar {
 
@@ -47,7 +53,23 @@ public class Bar {
 		frame.getContentPane().setForeground(Color.DARK_GRAY);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel lblDescripcin = new JLabel("Descripci\u00F3n");
+		
+		
+		String resourceName = "./resources/examples.JSON";
+		File file = new File(resourceName);
+		String content=null;
+		try {
+			content = FileUtils.readFileToString(file, "utf-8"); //pasa a un String un file
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		JSONObject bar = new JSONObject(content);
+		
+		String nombre = bar.getString("nombre");
+		String descripcion = bar.getString("descripcion");
+		
+		JLabel lblDescripcin = new JLabel(descripcion);
 		lblDescripcin.setForeground(Color.WHITE);
 		lblDescripcin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblDescripcin.setBounds(144, 80, 298, 41);
@@ -73,7 +95,7 @@ public class Bar {
 		button.setBounds(618, 16, 53, 41);
 		frame.getContentPane().add(button);
 		
-		JLabel lblNewLabel = new JLabel("Mudito bar");
+		JLabel lblNewLabel = new JLabel(nombre);// aqui el nombre sacado del json 
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
 		lblNewLabel.setBounds(144, 16, 298, 41);

@@ -1,4 +1,3 @@
-// un resumen de compra
 {
     "ofertas": [{
         "precio": 5,
@@ -131,7 +130,6 @@
     }
 ]}
 
-// un bar
 {
     "tipo": "bar",
     "barrio": "Deusto",
