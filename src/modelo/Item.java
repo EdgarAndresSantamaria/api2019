@@ -21,7 +21,7 @@ public class Item {
 	 * TODO
 	 * @return
 	 */
-	public JSONObject mostrarItem() {
+	public JSONObject verItem() {
 		JSONObject item = new JSONObject();
 		item.put("name", nombre);
 		item.put("precio", precio);

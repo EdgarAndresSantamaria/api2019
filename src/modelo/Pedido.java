@@ -2,6 +2,9 @@ package modelo;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class Pedido {
 	private int id;
 	private ArrayList<Item> productos;
@@ -25,20 +28,22 @@ public class Pedido {
 	 * TODO
 	 * @return
 	 */
-	public String mostrarPedido() {
-		String pedido = "{nombre:"+nombre_bar+", items:[";
+	public JSONObject verPedido() {
+		JSONObject pedido = new JSONObject();
+		pedido.put("nombre", nombre_bar);
+		
+		JSONArray arrayProductos = new JSONArray();
 		for(Item i:productos) {
-			pedido += i.mostrarItem();
-			pedido += ",";
+			arrayProductos.put(i.verItem());
 		}
-		// eliminar ultima coma TODO
-		pedido += "], ofertas: [";
+		
+		JSONArray arrayOfertas = new JSONArray();
 		for(Oferta o:ofertas) {
-			pedido += o.mostrarOferta();
-			pedido += ",";
+			arrayOfertas.put(o.verOferta());
 		}
-		// eliminar ultima coma TODO
-		pedido += "]}";
+	
+		pedido.put("productos", arrayProductos);
+		pedido.put("ofertas", arrayOfertas);
 		return pedido;
 	}
 	

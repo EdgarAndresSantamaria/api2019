@@ -23,7 +23,7 @@ public class Oferta extends Categoria {
 	 * TODO
 	 * @return
 	 */
-	public JSONObject mostrarOferta() {
+	public JSONObject verOferta() {
 		JSONObject oferta = new JSONObject();
 		oferta.put("informacion", super.mostrarCategoria());
 		oferta.put("precio", precio);

@@ -46,26 +46,45 @@ public class Establecimiento {
 	 * TODO
 	 */
 	public void mostrarCarta() {
-		// inicializar vista de la carta y pasarle el String JSON lista de categoria para que lo muestre 
-		JSONArray arrayCat = new JSONArray();
-		for(Categoria c : carta) {
-			arrayCat.put(c.mostrarCategoria());
-		}
-		
-		JSONObject carta = new JSONObject();
-		carta.put("carta", arrayCat);
-		System.out.println(carta.toString(4));
+		System.out.println(verCarta().toString(4));
 		 
 		
 		/**
-		 * TODO integration
+		 * TODO integrate GUI carta
 		 */
+	}
+
+	
+	/**
+	 * TODO
+	 * @param nombre
+	 * @return
+	 */
+	public Boolean is (String nombre) {
+		return nombre_Bar.equals(nombre);
 	}
 	
 	/**
 	 * TODO
+	 * @return
 	 */
-	public void mostrarEstablecimiento() {
+ 	public Boolean match(String categoria,String barrio) {
+		return tipo.equals(categoria) && this.barrio.equals(barrio);
+	}
+	
+	/**
+	 * TODO
+	 * @return
+	 */
+	public String getNombre() {
+		return nombre_Bar;
+	}
+	
+	/**
+	 * TODO
+	 * @return
+	 */
+	public JSONObject verEstablecimiento() {
 		JSONObject establecimiento = new JSONObject();
 		establecimiento.put("nombre", nombre_Bar);
 		establecimiento.put("descripion", descripcion);
@@ -75,14 +94,37 @@ public class Establecimiento {
 		
 		JSONArray arrayOfer = new JSONArray();
 		for(Oferta o : ofertas) {
-			arrayOfer.put(o.mostrarOferta());
+			arrayOfer.put(o.verOferta());
 		}
 		
 		establecimiento.put("ofertas", arrayOfer);
-		System.out.println(establecimiento.toString(4));
+		return establecimiento;
+	}
+	
+	/**
+	 * TODO
+	 * @return
+	 */
+	public JSONObject verCarta() {
+		// inicializar vista de la carta y pasarle el String JSON lista de categoria para que lo muestre 
+		JSONArray arrayCat = new JSONArray();
+		for(Categoria c : carta) {
+			arrayCat.put(c.mostrarCategoria());
+		}
+				
+		JSONObject carta = new JSONObject();
+		carta.put("carta", arrayCat);
+		return carta;
+	}
+	
+	/**
+	 * TODO
+	 */
+	public void mostrarEstablecimiento() {
+		System.out.println(verEstablecimiento().toString(4));
 		 
 		/**
-		 * TODO integration 
+		 * TODO integrate GUI bar
 		 */
 	}
 	
@@ -125,7 +167,5 @@ public class Establecimiento {
 		// add an item to product selection
 		Resumen.getInstance().anadirOferta(theOffer);
 	}
-	
-	
-		
+				
 }

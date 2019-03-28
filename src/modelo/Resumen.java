@@ -58,25 +58,34 @@ public class Resumen {
 	}
 	
 	/**
-	 * 
+	 * TODO
+	 * @return
 	 */
-	public void mostrarResumen() {
+	public JSONObject verResumen() {
 		JSONObject resumen = new JSONObject();
 		resumen.put("nombre", nombre_bar);
 		
 		JSONArray arrayItem = new JSONArray();
 		for(Item i : productos) {
-			arrayItem.put(i.mostrarItem());
+			arrayItem.put(i.verItem());
 		}
 		
 		resumen.put("productos", arrayItem);
 		
 		JSONArray arrayOfer = new JSONArray();
 		for(Oferta o:ofertas) {
-			arrayOfer.put(o.mostrarOferta());
+			arrayOfer.put(o.verOferta());
 		}
 		resumen.put("ofertas", arrayOfer);
-		System.out.println(resumen.toString(4));
+		return resumen;
+	}
+	
+	/**
+	 * TODO
+	 */
+	public void mostrarResumen() {
+		
+		System.out.println(verResumen().toString(4));
 		
 		// TODO integrate GUI resumen
 	}

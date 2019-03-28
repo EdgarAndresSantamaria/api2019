@@ -30,7 +30,7 @@ public class Categoria {
 		categoria.put("nombre", nombre);
 		JSONArray arr = new JSONArray();
 		for(Item i:productos) {
-			JSONObject item = i.mostrarItem();
+			JSONObject item = i.verItem();
 			arr.put(item);
 		}
 		// eliminar ultima coma TODO
