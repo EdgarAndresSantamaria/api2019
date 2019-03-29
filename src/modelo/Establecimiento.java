@@ -6,11 +6,6 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-/**
- * 
- * @author edgar
- *
- */
 public class Establecimiento {
 	
 	private String nombre_Bar;
@@ -109,7 +104,7 @@ public class Establecimiento {
 		// inicializar vista de la carta y pasarle el String JSON lista de categoria para que lo muestre 
 		JSONArray arrayCat = new JSONArray();
 		for(Categoria c : carta) {
-			arrayCat.put(c.mostrarCategoria());
+			arrayCat.put(c.verCategoria());
 		}
 				
 		JSONObject carta = new JSONObject();

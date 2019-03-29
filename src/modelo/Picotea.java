@@ -5,8 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import org.json.*;
 import org.apache.commons.io.FileUtils;
@@ -286,14 +289,46 @@ public class Picotea {
 		return establecimientosTmp;
     }
 	
+	/**
+	 * TODO
+	 */
+	public void mostrarContatcto() {		
+		goToURL("https://edgarandresblog.wordpress.com/2019/03/29/contacto/");
+		// TODO integrate GUI Picotea
+	}
 	
+	/**
+	 * TODO
+	 */
+	public void mostrarTerminos() {		
+		goToURL("https://edgarandresblog.wordpress.com/2019/03/29/picotea-politica-de-privacidad/");
+		// TODO integrate GUI Picotea
+	}
+	 
+	/**
+	 * TODO
+	 * @param URL   
+	 */
+	private void goToURL(String URL) {
+		if (java.awt.Desktop.isDesktopSupported()) {
+			java.awt.Desktop desktop = java.awt.Desktop.getDesktop();
+
+			if (desktop.isSupported(java.awt.Desktop.Action.BROWSE)) {
+				try {
+					java.net.URI uri = new java.net.URI(URL);
+					desktop.browse(uri);
+				} catch (URISyntaxException | IOException ex) {
+					Logger.getLogger(Picotea.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+		}
+	}
+
 	/**
 	 * TODO
 	 * @param args
 	 */
 	public static void main(String[]args) {
-
-		Picotea.getInstance().simulador();		
-
+		Picotea.getInstance().mostrarTerminos();		
 	}
 }

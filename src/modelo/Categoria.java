@@ -25,7 +25,7 @@ public class Categoria {
 	 * TODO
 	 * @return
 	 */
-	public JSONObject mostrarCategoria() {
+	public JSONObject verCategoria() {
 		JSONObject categoria = new JSONObject();
 		categoria.put("nombre", nombre);
 		JSONArray arr = new JSONArray();

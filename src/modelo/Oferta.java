@@ -25,7 +25,7 @@ public class Oferta extends Categoria {
 	 */
 	public JSONObject verOferta() {
 		JSONObject oferta = new JSONObject();
-		oferta.put("informacion", super.mostrarCategoria());
+		oferta.put("informacion", super.verCategoria());
 		oferta.put("precio", precio);
 		return oferta;
 	}
