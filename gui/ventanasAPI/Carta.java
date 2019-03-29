@@ -27,6 +27,8 @@ import java.util.ArrayList;
 
 import javax.swing.JList;
 import javax.swing.ListModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Carta {
 
@@ -86,15 +88,15 @@ public class Carta {
 		frame.getContentPane().add(lblBebidas);
 		
 		JSpinner spinner = new JSpinner();
-		spinner.setBounds(367, 85, 32, 26);
+		spinner.setBounds(367, 106, 32, 26);
 		frame.getContentPane().add(spinner);
 		
 		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setBounds(367, 127, 32, 26);
+		spinner_1.setBounds(367, 148, 32, 26);
 		frame.getContentPane().add(spinner_1);
 		
 		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(367, 169, 32, 26);
+		spinner_2.setBounds(367, 190, 32, 26);
 		frame.getContentPane().add(spinner_2);
 		
 		JLabel lblComida = new JLabel("Comida");
@@ -107,6 +109,17 @@ public class Carta {
 		spinner_3.setBounds(367, 268, 32, 26);
 		frame.getContentPane().add(spinner_3);
 		
+		DefaultListModel<String> model = new DefaultListModel<>();
+		JList<String> list = new JList<>( model );
+		list.setBounds(15, 101, 162, 115);
+		frame.getContentPane().add(list);
+		
+		DefaultListModel<String> model1 = new DefaultListModel<>();
+		JList<String> list2 = new JList<>(model1);
+		list2.setBounds(188, 101, 162, 115);
+		frame.getContentPane().add(list2);
+		
+		
 		JSpinner spinner_4 = new JSpinner();
 		spinner_4.setBounds(367, 310, 32, 26);
 		frame.getContentPane().add(spinner_4);
@@ -116,6 +129,25 @@ public class Carta {
 		frame.getContentPane().add(spinner_5);
 		
 		JButton btnResumen = new JButton("Resumen");
+		btnResumen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int valor1 = (Integer)spinner.getValue();
+				int valor2 = (Integer)spinner_1.getValue();
+				int valor3 = (Integer)spinner_2.getValue();
+				 	 for(int a=1;a<=valor1;a++) {
+				Object item = list.getModel().getElementAt(0);
+	            System.out.println("Item = " + item);
+				 	 }
+				 	 for(int b=1;b<=valor2; b++) {
+	            Object item1 = list.getModel().getElementAt(1);
+	            System.out.println("Item = " + item1);
+				 	 }
+//				 	 
+//	            Object item2 = list.getModel().getElementAt(2);
+//	            System.out.println("Item = " + item2);
+			    }
+			
+		});
 		btnResumen.setBackground(SystemColor.desktop);
 		btnResumen.setForeground(SystemColor.text);
 		btnResumen.setBounds(494, 336, 146, 44);
@@ -137,17 +169,7 @@ public class Carta {
 		label_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		label_3.setBounds(188, 232, 146, 20);
 		frame.getContentPane().add(label_3);
-		
-		DefaultListModel<String> model = new DefaultListModel<>();
-		JList<String> list = new JList<>( model );
-		list.setBounds(15, 101, 162, 115);
-		frame.getContentPane().add(list);
-		
-		DefaultListModel<String> model1 = new DefaultListModel<>();
-		JList<String> list2 = new JList<>(model1);
-		list2.setBounds(188, 101, 162, 115);
-		frame.getContentPane().add(list2);
-		
+	
 		
 			String resourceName = "./resources/examples.JSON";
 			File file = new File(resourceName);
