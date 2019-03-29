@@ -1,4 +1,4 @@
-package aplicacionApi;
+package ventanasAPI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
