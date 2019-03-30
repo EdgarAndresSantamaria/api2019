@@ -169,6 +169,14 @@ public class Carta {
 		label_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		label_3.setBounds(188, 232, 146, 20);
 		frame.getContentPane().add(label_3);
+		
+		JList<String> list_1 = new JList<String>((ListModel) null);
+		list_1.setBounds(15, 270, 162, 115);
+		frame.getContentPane().add(list_1);
+		
+		JList<String> list_2 = new JList<String>((ListModel) null);
+		list_2.setBounds(190, 270, 162, 115);
+		frame.getContentPane().add(list_2);
 	
 		
 			String resourceName = "./resources/examples.JSON";

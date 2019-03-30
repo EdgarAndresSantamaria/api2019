@@ -83,5 +83,9 @@ public class Bares {
 		JButton btnBarTequila = new JButton("Bar Tequila");
 		btnBarTequila.setBounds(288, 227, 225, 60);
 		frame.getContentPane().add(btnBarTequila);
+		
+		JButton btnPicotea = new JButton("Picotea");
+		btnPicotea.setBounds(15, 410, 115, 29);
+		frame.getContentPane().add(btnPicotea);
 	}
 }
