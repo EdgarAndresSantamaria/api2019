@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import org.json.*;
 
 import ventanasAPI.Carta;
+import ventanasAPI.PicoteaV;
 
 import org.apache.commons.io.FileUtils;
 
@@ -340,6 +341,7 @@ public class Picotea {
 	 * @param args
 	 */
 	public static void main(String[]args) {
-		Picotea.getInstance().simulador();		
+		PicoteaV frame = new PicoteaV();
+		frame.setVisible(true);
 	}
 }

@@ -36,22 +36,6 @@ public class PicoteaV extends JFrame {
 	private JButton btnNewButton_1;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					PicoteaV frame = new PicoteaV();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public PicoteaV() {
@@ -100,7 +84,7 @@ public class PicoteaV extends JFrame {
 			String Descri= Picotea.getInstance().verPicotea().getString("descripcion");
 			lblNewLabel = new JLabel(Descri);
 			lblNewLabel.setForeground(Color.WHITE);
-			lblNewLabel.setBounds(50, 213, 511, 43);
+			lblNewLabel.setBounds(50, 213, 800, 43);
 		}
 		return lblNewLabel;
 	}
