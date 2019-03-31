@@ -31,6 +31,7 @@ public class Pedido {
 	public JSONObject verPedido() {
 		JSONObject pedido = new JSONObject();
 		pedido.put("nombre", nombre_bar);
+		pedido.put("id", id);
 		
 		JSONArray arrayProductos = new JSONArray();
 		for(Item i:productos) {

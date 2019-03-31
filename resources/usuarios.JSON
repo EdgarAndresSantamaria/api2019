@@ -1,10 +1,30 @@
 {
-    "edgar": [
-        "a",
+    "foo@mail.com": [
+        "batman",
+        "123123123"
+    ],
+    "iivan@ivan.com": [
+        "ivan",
+        "123123123"
+    ],
+    "ana@ana.com": [
+        "ana",
+        "123123123"
+    ],
+    "andrea@gmail.com": [
+        "andrea",
+        "123123123"
+    ],
+    "admin@admin.com": [
+        "admin",
         "234-234-234"
     ],
-    "admin": [
-        "admin",
+    "e@e.com": [
+        "edgar",
+        "612123131"
+    ],
+    "edgar@edgar.com": [
+        "a",
         "234-234-234"
     ]
 }

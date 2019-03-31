@@ -42,6 +42,13 @@ public class Resumen {
 	}
 	
 	/**
+	 * TODO
+	 */
+	public String getBar() {
+		return nombre_bar;
+	}
+	
+	/**
 	 * 
 	 * @param producto
 	 */

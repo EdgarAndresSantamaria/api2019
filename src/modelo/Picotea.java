@@ -12,6 +12,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.json.*;
+
+import ventanasAPI.Carta;
+
 import org.apache.commons.io.FileUtils;
 
 public class Picotea {
@@ -149,6 +152,7 @@ public class Picotea {
 		/**
 		 * prueba registro y display de pedidos
 		 */
+		
 		/**
 		Resumen.getInstance().setBar("Deusto_Bar");
 		bares.get(1).anadirCarritoItem("café & té", "café");
@@ -175,6 +179,13 @@ public class Picotea {
 		System.out.println(LoginRegistro.getInstance().verLogin().toString(4));
 		System.out.println(LoginRegistro.getInstance().entrar("edgar","a"));
 		 */
+		
+		/**
+		 * mostrar carta
+		 */
+		//Carta tmp = new Carta(bares.get(0));
+		// Carta tmp = new Carta(bares.get(1));
+		//Carta tmp = new Carta(bares.get(2));
 	}
 	
 	/**
@@ -329,6 +340,6 @@ public class Picotea {
 	 * @param args
 	 */
 	public static void main(String[]args) {
-		Picotea.getInstance().mostrarTerminos();		
+		Picotea.getInstance().simulador();		
 	}
 }

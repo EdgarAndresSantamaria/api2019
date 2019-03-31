@@ -6,6 +6,9 @@ import java.util.Iterator;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import ventanasAPI.Bar;
+import ventanasAPI.Bares;
+
 public class Establecimiento {
 	
 	private String nombre_Bar;
@@ -116,11 +119,7 @@ public class Establecimiento {
 	 * TODO
 	 */
 	public void mostrarEstablecimiento() {
-		System.out.println(verEstablecimiento().toString(4));
-		 
-		/**
-		 * TODO integrate GUI bar
-		 */
+		new Bar(this);
 	}
 	
 	/**

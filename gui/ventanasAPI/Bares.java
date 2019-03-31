@@ -4,44 +4,52 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import modelo.Picotea;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.Color;
 
 public class Bares {
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Bares window = new Bares();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JList<String> bares;
 
 	/**
 	 * Create the application.
 	 */
-	public Bares() {
-		initialize();
+	public Bares(String categoria, String barrio) {
+		initialize(categoria, barrio);
+		frame.setVisible(true);
+	}
+	
+	private void verBar() {
+		String selectedBar = bares.getSelectedValue();
+		if (selectedBar ==null ) {
+			JOptionPane
+			.showMessageDialog(null,
+					"Debees seleccionar un bar");
+		}else {
+			frame.dispose();
+			Picotea.getInstance().entrarEstablecimiento(selectedBar);
+		}
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String categoria, String barrio) {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
 		frame.setBounds(100, 100, 801, 523);
@@ -50,42 +58,66 @@ public class Bares {
 		
 		JLabel lblBares = new JLabel("Bares");
 		lblBares.setForeground(Color.WHITE);
-		lblBares.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 35));
-		lblBares.setBounds(188, 0, 165, 57);
+		lblBares.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+		lblBares.setBounds(291, 4, 300, 37);
 		frame.getContentPane().add(lblBares);
 		
-		JButton btnMuditoBar = new JButton("Mudito Bar");
-		btnMuditoBar.setBounds(34, 73, 225, 60);
-		frame.getContentPane().add(btnMuditoBar);
+		JSONObject establecimientos = Picotea.getInstance().verEstablecimientos(categoria,barrio);		
 		
-		JButton button = new JButton("");
-		button.setIcon(new ImageIcon(Bares.class.getResource("/ventanasAPI/icon.png")));
-		button.setBackground(Color.DARK_GRAY);
-		button.setBounds(611, 16, 53, 41);
-		frame.getContentPane().add(button);
+		Vector<String>  data = new Vector<String> ();
+		JSONArray carta = establecimientos.getJSONArray("establecimientos");
+		for (Object obj:carta) {
+			//recuperar información
+			data.add((String)obj);
+		}
+		bares = new JList<String>(data);
+		bares.setBounds(50, 101, 250, 250);
+		frame.getContentPane().add(bares);
 		
-		JButton btnBarVader = new JButton("Bar Vader");
-		btnBarVader.setBounds(34, 151, 225, 60);
-		frame.getContentPane().add(btnBarVader);
+		JButton btnAnadir = new JButton("Ver Bar");
+		btnAnadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				verBar();
+			}
+			
+		});
+		btnAnadir.setForeground(SystemColor.text);
+		btnAnadir.setBackground(SystemColor.desktop);
+		btnAnadir.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnAnadir.setBounds(380, 380, 168, 69);
+		frame.getContentPane().add(btnAnadir);
 		
-		JButton btnBarBestial = new JButton("Bar Bestial");
-		btnBarBestial.setBounds(288, 73, 225, 60);
-		frame.getContentPane().add(btnBarBestial);
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				Perfil p=new Perfil();
+				p.setVisible(true);
+			}
+			
+		});
+		btnVolver.setForeground(SystemColor.text);
+		btnVolver.setBackground(SystemColor.desktop);
+		btnVolver.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnVolver.setBounds(50, 380, 168, 69);
+		frame.getContentPane().add(btnVolver);
 		
-		JButton btnBarGolfo = new JButton("Bar Golfo");
-		btnBarGolfo.setBounds(288, 151, 225, 60);
-		frame.getContentPane().add(btnBarGolfo);
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/resources/icon.png")));
+		btnNewButton.setBounds(624, 4, 50, 50);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				Perfil p=new Perfil();
+				p.setVisible(true);
+			}
+			
+		});
+		frame.getContentPane().add(btnNewButton);
 		
-		JButton btnBarParque = new JButton("Bar Parque");
-		btnBarParque.setBounds(34, 227, 225, 60);
-		frame.getContentPane().add(btnBarParque);
-		
-		JButton btnBarTequila = new JButton("Bar Tequila");
-		btnBarTequila.setBounds(288, 227, 225, 60);
-		frame.getContentPane().add(btnBarTequila);
-		
-		JButton btnPicotea = new JButton("Picotea");
-		btnPicotea.setBounds(15, 410, 115, 29);
-		frame.getContentPane().add(btnPicotea);
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setIcon(new ImageIcon(Perfil.class.getResource("/resources/calabacin.png")));
+		lblNewLabel_1.setBounds(380, 101, 164, 150);
+		frame.getContentPane().add(lblNewLabel_1);
 	}
 }

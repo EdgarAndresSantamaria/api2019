@@ -11,40 +11,47 @@ import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import modelo.Establecimiento;
+import modelo.Resumen;
+
 import javax.swing.JButton;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
+
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 public class Bar {
 
 	private JFrame frame;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Bar window = new Bar();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private Establecimiento elBar;
+	private JList<String> ofertas;
 
 	/**
 	 * Create the application.
 	 */
-	public Bar() {
+	public Bar(Establecimiento bar) {
+		elBar = bar;
 		initialize();
+		frame.setVisible(true);
+	}
+	
+	private void anadirOferta() {
+		String selectedOffer = ofertas.getSelectedValue();
+		if (selectedOffer ==null ) {
+			JOptionPane
+			.showMessageDialog(null,
+					"Debes seleccionar una oferta");
+		}else {
+			elBar.anadirCarritoOferta(selectedOffer.split(",")[0]);
+		}
 	}
 
 	/**
@@ -53,95 +60,132 @@ public class Bar {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(Color.DARK_GRAY);
-		frame.getContentPane().setForeground(Color.DARK_GRAY);
+		frame.setBounds(100, 100, 801, 523);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		
-		
-		String resourceName = "./resources/examplesIvan.JSON";
-		File file = new File(resourceName);
-		String content=null;
-		try {
-			content = FileUtils.readFileToString(file, "utf-8"); //pasa a un String un file
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		JSONObject bar = new JSONObject(content);
-		
-		DefaultListModel<String> model = new DefaultListModel<>();
-		JList<String> list = new JList<>(model);
-		list.setBounds(77, 190, 241, 78);
-		frame.getContentPane().add(list);
-		frame.setBounds(100, 100, 708, 470);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		DefaultListModel<String> modelPrecios = new DefaultListModel<>();
-		JList list_1 = new JList(modelPrecios);
-		list_1.setBounds(374, 190, 241, 88);
-		frame.getContentPane().add(list_1);
-		
-		
+		JSONObject bar = elBar.verEstablecimiento();
 		String nombre = bar.getString("nombre");
-		System.out.println(bar.getJSONArray("productos"));
-		
-		JSONArray products = bar.getJSONArray("productos");
-		for(int i=0;i< products.length();i++) {
-			double precio = products.getJSONObject(i).getDouble("precio");
-			System.out.println(products.getJSONObject(i).getDouble("precio"));
-			String nomProducto = products.getJSONObject(i).getString("name");
-			
-			modelPrecios.addElement(Double.toString(precio));
-			model.addElement(nomProducto);
+		String descripcion = bar.getString("descripion");
+		String tipo = bar.getString("tipo");
+		String barrio = bar.getString("barrio");
+		String mail = bar.getString("mail");
+	
+	
+		Vector<String>  data = new Vector<String> ();
+		JSONArray offers = bar.getJSONArray("ofertas");
+		for (Object obj:offers) {
+			JSONObject laoferta = (JSONObject) obj;
+			JSONObject info = (JSONObject) laoferta.get("informacion");
+			//recuperar información
+			data.add(info.getString("nombre")+ ", "+ String.valueOf(laoferta.getFloat("precio"))+ " €");
 		}
 		
+		ofertas = new JList<String>(data);
+		ofertas.setBounds(50, 225, 250, 100);
+		frame.getContentPane().add(ofertas);
 		
-		JLabel lblDescripcin = new JLabel();
-		lblDescripcin.setForeground(Color.WHITE);
-		lblDescripcin.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
-		lblDescripcin.setBounds(144, 80, 298, 41);
-		frame.getContentPane().add(lblDescripcin);
+		JButton btnAnadirOferta = new JButton("Añadir oferta");
+		btnAnadirOferta.setForeground(SystemColor.text);
+		btnAnadirOferta.setBackground(SystemColor.desktop);
+		btnAnadirOferta.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnAnadirOferta.setBounds(380, 250, 168, 69);
+		btnAnadirOferta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(Resumen.getInstance().getBar().equals("")) {
+					Resumen.getInstance().setBar(elBar.getNombre());
+					anadirOferta();
+				}else if (Resumen.getInstance().getBar().equals(elBar.getNombre())){
+					anadirOferta();
+				}else {
+					JOptionPane
+					.showMessageDialog(null,
+							"Solo puedes reservar en un bar al mismo tiempo, actualmente estas reservando en " + Resumen.getInstance().getBar());
+				}
+			}
+			
+		});
+		frame.getContentPane().add(btnAnadirOferta);
 		
-		JButton btnBusqueda = new JButton("Busqueda");
+
+		JLabel lblNewLabel = new JLabel(nombre);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
+		lblNewLabel.setBounds(291, 4, 300, 37);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel lblDescripcion = new JLabel("descripcion: "+descripcion);
+		lblDescripcion.setForeground(Color.WHITE);
+		lblDescripcion.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblDescripcion.setBounds(50, 40, 300, 37);
+		frame.getContentPane().add(lblDescripcion);
+		
+		JLabel lblTipo = new JLabel("Tipo: "+tipo);
+		lblTipo.setForeground(Color.WHITE);
+		lblTipo.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblTipo.setBounds(50, 77, 300, 37);
+		frame.getContentPane().add(lblTipo);
+		
+		JLabel lblBarrio = new JLabel("Barrio: " +barrio);
+		lblBarrio.setForeground(Color.WHITE);
+		lblBarrio.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblBarrio.setBounds(50, 114, 300, 37);
+		frame.getContentPane().add(lblBarrio);
+		
+		JLabel lblMail= new JLabel("-mail: "+mail);
+		lblMail.setForeground(Color.WHITE);
+		lblMail.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblMail.setBounds(50, 151, 300, 37);
+		frame.getContentPane().add(lblMail);
+		
+
+		JLabel lblOfertas = new JLabel("Ofertas");
+		lblOfertas.setForeground(Color.WHITE);
+		lblOfertas.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 10));
+		lblOfertas.setBounds(50, 188, 300, 37);
+		frame.getContentPane().add(lblOfertas);
+		
+		JButton btnBusqueda = new JButton("Volver");
 		btnBusqueda.setForeground(SystemColor.text);
 		btnBusqueda.setBackground(SystemColor.desktop);
 		btnBusqueda.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnBusqueda.setBounds(15, 299, 168, 69);
+		btnBusqueda.setBounds(50, 380, 168, 69);
+		btnBusqueda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				new Bares("bar","Ibarrekolanda");
+			}
+			
+		});
 		frame.getContentPane().add(btnBusqueda);
 		
 		JButton btnCarta = new JButton("Carta");
 		btnCarta.setForeground(SystemColor.text);
 		btnCarta.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		btnCarta.setBackground(SystemColor.desktop);
-		btnCarta.setBounds(527, 299, 144, 69);
+		btnCarta.setBounds(380, 380, 144, 69);
+		btnCarta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				new Carta(elBar);
+			}
+			
+		});
 		frame.getContentPane().add(btnCarta);
 		
-		JButton button = new JButton("");
-		button.setBackground(Color.DARK_GRAY);
-		button.setIcon(new ImageIcon(Bar.class.getResource("/ventanasAPI/icon.png")));
-		button.setBounds(618, 16, 53, 41);
-		frame.getContentPane().add(button);
 		
-		JLabel lblNewLabel = new JLabel(nombre);
-		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 30));
-		lblNewLabel.setBounds(144, 16, 298, 41);
-		frame.getContentPane().add(lblNewLabel);
-		
-		JLabel lblProductos = new JLabel("Productos");
-		lblProductos.setForeground(Color.WHITE);
-		lblProductos.setBounds(77, 148, 106, 20);
-		frame.getContentPane().add(lblProductos);
-		
-		
-		
-		JLabel lblPrecios = new JLabel("Precios");
-		lblPrecios.setForeground(Color.WHITE);
-		lblPrecios.setBounds(374, 148, 106, 20);
-		frame.getContentPane().add(lblPrecios);
-		
-		
-		
+		JButton btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/resources/icon.png")));
+		btnNewButton.setBounds(624, 4, 50, 50);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				Perfil p=new Perfil();
+				p.setVisible(true);
+			}
+			
+		});
+		frame.getContentPane().add(btnNewButton);
 		
 	}
 }

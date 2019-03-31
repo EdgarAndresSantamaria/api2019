@@ -3,6 +3,8 @@ package modelo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.io.FileUtils;
 import org.json.JSONArray;
@@ -122,12 +124,29 @@ public class LoginRegistro {
 	/**
 	 * 
 	 */
-	public void mostrarLoginRegistro() {
-		System.out.println(verLogin().toString(4));
-		
-		
-		/**
-		 * TODO integration
-		 */
+	public void salir() {
+		this.usuario = null;
+		this.password = null;
+		telefono = null;
+	}
+	
+	/**
+	 * TODO
+	 * @param correo
+	 * @return
+	 */
+	public boolean esEmail(String correo) {
+		// Patron de validar el email
+		String emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@"
+				+ "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
+		Pattern pattern = Pattern.compile(emailPattern);
+		if (correo != null) {
+			Matcher matcher = pattern.matcher(correo);
+			if (matcher.matches()) {
+				return true;
+			}
+
+		}
+		return false;
 	}
 }
