@@ -6,10 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.swing.ImageIcon;
 
 import org.json.*;
 
@@ -224,8 +228,7 @@ public class Picotea {
 	 * @return
 	 */
 	private ArrayList<Establecimiento> cargarEstablecimientos(){
-		String resourceName = "./resources/establecimientos.JSON";
-		File file = new File(resourceName);
+		File file = new File("establecimientos.JSON");
 		String content=null;
 		try {
 			content = FileUtils.readFileToString(file, "utf-8");

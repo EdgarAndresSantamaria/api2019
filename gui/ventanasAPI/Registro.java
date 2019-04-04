@@ -200,7 +200,7 @@ public class Registro extends JFrame {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
 			lblNewLabel.setIcon(new ImageIcon(Registro.class
-					.getResource("/resources/pintxos.png")));
+					.getResource("/pintxos.png")));
 			lblNewLabel.setBounds(308, 145, 306, 170);
 		}
 		return lblNewLabel;

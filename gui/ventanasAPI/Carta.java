@@ -117,7 +117,7 @@ public class Carta {
 		frame.getContentPane().add(lblCarta);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/resources/icon.png")));
+		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/icon.png")));
 		btnNewButton.setBounds(624, 4, 50, 50);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -224,7 +224,7 @@ public class Carta {
 		frame.getContentPane().add(btnAnadir);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(Carta.class.getResource("/resources/450_1000.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(Carta.class.getResource("/450_1000.jpg")));
 		lblNewLabel.setBounds(380, 85, 183, 174);
 		frame.getContentPane().add(lblNewLabel);
 		

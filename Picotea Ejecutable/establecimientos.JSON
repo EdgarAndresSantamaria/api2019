@@ -1,0 +1,156 @@
+{
+    "establecimientos": [
+             {
+              "nombre": "Ibarreko_Bar",
+              "descripcion": "el bar de Ibarreko",
+              "e-mail": "foo@mail.com",
+              "carta":
+              [
+                  {
+	              "categoria": "comida",
+	              "productos":
+		              [
+			              {
+				              "nombre": "snacks",
+				              "precio": 1.5
+		               	  },
+		               	   {
+				              "nombre": "sandwiches",
+				              "precio": 1.25
+		               	  }
+	               	  ]
+               	  },
+               	   {
+	              "categoria": "bebida",
+	              "productos":
+		              [
+			              {
+				              "nombre": "vino tinto",
+				              "precio": 0.6
+		               	  },
+		               	   {
+				              "nombre": "cerveza",
+				              "precio": 1.2
+		               	  }
+	               	  ]
+               	  }          	    
+               ],
+               "ofertas":
+               [
+                  {
+	              "categoria": "3x2 en snacks",
+	              "precio": 2,
+	              "productos":
+		              [
+			              {
+				              "nombre": "snacks",
+				              "precio": 1.5
+		               	  }   
+	               	  ] 
+	              }  
+	                  	    
+               ],
+              "tipo": "bar",
+              "barrio": "Ibarrekolanda"
+         },
+         {
+              "nombre": "Deusto_Bar",
+              "descripcion": "el bar de deusto",
+              "e-mail": "foo@mail.com",
+              "carta":[
+              
+                  {
+	              "categoria": "café & té",
+	              "productos":
+		              [
+			              {
+				              "nombre": "café",
+				              "precio": 1.5
+		               	  },
+		               	   {
+				              "nombre": "té rojo",
+				              "precio": 1.25
+		               	  }
+	               	  ]
+               	  },
+               	  
+               	   {
+	              "categoria": "bebida",
+	              "productos":
+		              [
+			              {
+				              "nombre": "marianito",
+				              "precio": 2.5
+		               	  },
+		               	   {
+				              "nombre": "cerveza",
+				              "precio": 2
+		               	  }
+	               	  ]
+               	  }          	    
+               ],
+               "ofertas":
+               [
+                  {
+	              "categoria": "3x2 marianito",
+	              "precio": 5,
+	              "productos":
+		              [
+			              {
+				               "nombre": "marianito",
+				               "precio": 2.5
+		               	  }   
+	               	  ] 
+	              }  
+	                  	    
+               ],
+              "tipo": "bar",
+              "barrio": "Deusto"
+         },
+         {
+              "nombre": "Ibarreko_Bar1",
+              "descripcion": "el bar de Ibarreko",
+              "e-mail": "foo@mail.com",
+              "carta":[
+               	   {
+	              "categoria": "bebida",
+	              "productos":
+		              [
+		              {
+			              "nombre": "vino tinto",
+			              "precio": 1.25
+	               	  },
+	               	  {
+			              "nombre": "cerveza",
+			              "precio": 2
+	               	  },
+	               	  {
+			              "nombre": "vino blanco",
+			              "precio": 1.25
+	               	  },
+	               	  {
+			              "nombre": "vino rosado",
+			              "precio": 1.25
+	               	  }
+	               	  ]
+               	  }          	    
+               ],
+               "ofertas":
+               [
+                  {
+	              "categoria": "3x2 vino blanco",
+	              "precio": 2.5,
+	              "productos":
+		              [
+			              {
+				                "nombre": "vino blanco",
+			              		"precio": 1.25
+		               	  }   
+	               	  ] 
+	              }          	    
+               ],
+              "tipo": "bar",
+              "barrio": "Ibarrekolanda"
+         }      
+    ]
+}

@@ -175,7 +175,7 @@ public class Bar {
 		
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/resources/icon.png")));
+		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/icon.png")));
 		btnNewButton.setBounds(624, 4, 50, 50);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

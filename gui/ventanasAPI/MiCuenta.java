@@ -53,7 +53,7 @@ public class MiCuenta extends JFrame {
 	
 	private JButton getIcon() {
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/resources/icon.png")));
+		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/icon.png")));
 		btnNewButton.setBounds(624, 4, 50, 50);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -168,7 +168,7 @@ public class MiCuenta extends JFrame {
     private JLabel getLabel_1() {
 		if (label_1 == null) {
 			label_1 = new JLabel("");
-			label_1.setIcon(new ImageIcon(MiCuenta.class.getResource("/resources/miCuenta.png")));
+			label_1.setIcon(new ImageIcon(MiCuenta.class.getResource("/miCuenta.png")));
 			label_1.setBounds(440, 130, 200, 138);
 		}
 		return label_1;

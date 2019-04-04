@@ -74,7 +74,7 @@ public class PicoteaV extends JFrame {
 	private JLabel getLabel_2() {
 		if (label == null) {
 			label = new JLabel("");
-			label.setIcon(new ImageIcon(PicoteaV.class.getResource("/resources/ppp.PNG")));
+			label.setIcon(new ImageIcon(PicoteaV.class.getResource("/ppp.PNG")));
 			label.setBounds(50, 85, 511, 79);
 		}
 		return label;

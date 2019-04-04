@@ -3,6 +3,8 @@ package modelo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,8 +24,7 @@ public class LoginRegistro {
 	 */
 	private LoginRegistro() {
 		// cargar fichero de usuarios
-		String resourceName = "./resources/usuarios.JSON";
-		File file = new File(resourceName);
+		File file = new File("usuarios.JSON");
 		String content=null;
 		try {
 			content = FileUtils.readFileToString(file, "utf-8");

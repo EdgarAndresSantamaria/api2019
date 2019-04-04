@@ -180,7 +180,7 @@ public class Login extends JFrame {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/resources/pintxoabando.png")));
+			lblNewLabel.setIcon(new ImageIcon(Login.class.getResource("/pintxoabando.png")));
 			lblNewLabel.setBounds(54, 86, 296, 143);
 		}
 		return lblNewLabel;

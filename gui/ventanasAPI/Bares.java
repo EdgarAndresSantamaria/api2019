@@ -103,7 +103,7 @@ public class Bares {
 		frame.getContentPane().add(btnVolver);
 		
 		JButton btnNewButton = new JButton("");
-		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/resources/icon.png")));
+		btnNewButton.setIcon(new ImageIcon(Carta.class.getResource("/icon.png")));
 		btnNewButton.setBounds(624, 4, 50, 50);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -116,7 +116,7 @@ public class Bares {
 		frame.getContentPane().add(btnNewButton);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setIcon(new ImageIcon(Perfil.class.getResource("/resources/calabacin.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Perfil.class.getResource("/calabacin.png")));
 		lblNewLabel_1.setBounds(380, 101, 164, 150);
 		frame.getContentPane().add(lblNewLabel_1);
 	}
